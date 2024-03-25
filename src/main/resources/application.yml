@@ -1,0 +1,70 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/collecting?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 1234
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+      dialect: org.hibernate.dialect.MySQL8InnoDBDialect
+
+
+
+  logging:
+    level:
+      org.hibernate.SQL: debug
+
+  #  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: ENC(m6MbBpmIJAK2qG+ZRXPWUegfDJw/qRcy7bSqpZgOC7g=)
+#    password:
+#    properties:
+#      mail.smtp.auth: true
+#      mail.smtp.starttls.enable: true
+
+  main:
+    allow-circular-references: true
+
+
+jwt:
+  password: ENC(EkScQq/G1fRkMjzEBuJm2929lWSio0h2SP4muyxM5dLQVAMlFLOV5rst66cGRjLTVo6hgqDDcNmzXMegiy6oWj7j8jF8pPX49p6vsWOmgo281iBPdk6kJnhW+mBZ+GN/wd6Vu8twkvKz5pz/PSnpB7/3FN+Et6tKBwZ4OcmQREIoQ5U0m1cJFB2MF/aZwiMfLeLkF7HBRtmlFnUiNKTc80dsFXwkacE6ZMg2QDktra8FI8XNECFhBKEnIWs4pvta82wtMafWl6k=)
+  atk: 86400000 # 24 * 60 * 60 * 1000L; ???? ??? ?
+  rtk: 2592000000 # 30 * 24 * 60 * 60 * 1000L; ???? ??? ?
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: never
