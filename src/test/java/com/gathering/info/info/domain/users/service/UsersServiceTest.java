@@ -104,7 +104,7 @@ class UsersServiceTest {
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
-    @DisplayName(".")
+    @DisplayName("사용자를 조회하면 사용자의 이름, 직업, 전화번호, 성별을 조회한다.")
     @Test
     void getUserInfo() {
         //given
@@ -114,10 +114,10 @@ class UsersServiceTest {
                 .phone("010-0000-0000")
                 .man(true)
                 .build();
-        usersService.registerUser(register);
+        Long id = usersService.registerUser(register);
 
         //when
-        UserResponse userInfo = usersService.getUserInfo(1L);
+        UserResponse userInfo = usersService.getUserInfo(id);
 
         // then
         assertThat(userInfo.name()).isEqualTo("name");
@@ -126,9 +126,9 @@ class UsersServiceTest {
         assertThat(userInfo.man()).isEqualTo(true);
     }
 
-    @DisplayName(".")
+    @DisplayName("사용자의 Id 값으로 삭제할 수 있다.")
     @Test
-    void getUserInfohh() {
+    void deleteUser() {
         //given
         Register register = Register.builder()
                 .name("name")
@@ -136,10 +136,10 @@ class UsersServiceTest {
                 .phone("010-0000-0000")
                 .man(true)
                 .build();
-        usersService.registerUser(register);
+        Long id = usersService.registerUser(register);
 
         //when
-        usersService.deleteUser(1L);
+        usersService.deleteUser(id);
         List<Users> users = usersRepository.findAll();
 
         // then

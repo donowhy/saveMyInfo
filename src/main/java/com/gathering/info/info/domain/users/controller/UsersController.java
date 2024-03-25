@@ -20,8 +20,8 @@ public class UsersController {
     private final UsersService usersService;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register (@RequestBody Register register) {
-        usersService.registerUser(register);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<Long> register (@RequestBody Register register) {
+        Long id = usersService.registerUser(register);
+        return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 }

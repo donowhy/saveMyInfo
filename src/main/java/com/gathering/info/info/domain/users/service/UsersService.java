@@ -18,8 +18,9 @@ public class UsersService {
     private final UsersRepository usersRepository;
 
     // 저장
-    public void registerUser (Register register) {
-        usersRepository.save(Register.of(register));
+    public Long registerUser (Register register) {
+        Users user = usersRepository.save(Register.of(register));
+        return user.getId();
     }
 
     // 단건 조회
