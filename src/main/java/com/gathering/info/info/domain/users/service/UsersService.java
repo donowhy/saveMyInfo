@@ -1,6 +1,6 @@
 package com.gathering.info.info.domain.users.service;
 
-import com.gathering.info.info.domain.users.dto.serviceDTO.Register;
+import com.gathering.info.info.domain.users.dto.serviceDTO.RegisterService;
 import com.gathering.info.info.domain.users.dto.serviceDTO.UserResponse;
 import com.gathering.info.info.domain.users.entity.Users;
 import com.gathering.info.info.domain.users.repository.UsersRepository;
@@ -18,8 +18,8 @@ public class UsersService {
     private final UsersRepository usersRepository;
 
     // 저장
-    public Long registerUser (Register register) {
-        Users user = usersRepository.save(Register.of(register));
+    public Long registerUser (RegisterService registerService) {
+        Users user = usersRepository.save(RegisterService.of(registerService));
         return user.getId();
     }
 
@@ -38,4 +38,8 @@ public class UsersService {
 
         usersRepository.delete(user);
     }
+
+    // 로그인
+
+    // 회원 정보 수정
 }

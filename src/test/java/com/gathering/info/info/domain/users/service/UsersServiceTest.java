@@ -1,6 +1,6 @@
 package com.gathering.info.info.domain.users.service;
 
-import com.gathering.info.info.domain.users.dto.serviceDTO.Register;
+import com.gathering.info.info.domain.users.dto.serviceDTO.RegisterService;
 import com.gathering.info.info.domain.users.dto.serviceDTO.UserResponse;
 import com.gathering.info.info.domain.users.entity.Users;
 import com.gathering.info.info.domain.users.entity.enumType.Jobs;
@@ -36,10 +36,10 @@ class UsersServiceTest {
     @Test
     void registerUser() {
         //given
-        Register register = new Register("name", Jobs.STUDENT, "010-0000-0000", true);
+        RegisterService registerService = new RegisterService("name", Jobs.STUDENT, "010-0000-0000", true);
 
         //when
-        usersService.registerUser(register);
+        usersService.registerUser(registerService);
         List<Users> users = usersRepository.findAll();
 
         //then
@@ -53,22 +53,22 @@ class UsersServiceTest {
     @Test
     void phoneNumberDuplicatedError() {
         //given
-        Register register1 = Register.builder()
+        RegisterService registerService1 = RegisterService.builder()
                 .name("name1")
                 .job(Jobs.STUDENT)
                 .phone("010-0000-0000")
                 .man(true)
                 .build();
 
-        Register register2 = Register.builder()
+        RegisterService registerService2 = RegisterService.builder()
                 .name("name2")
                 .job(Jobs.FINDER)
                 .phone("010-0000-0000")
                 .man(true)
                 .build();
         //when //then
-        usersService.registerUser(register1);
-        assertThatThrownBy(() -> usersService.registerUser(register2))
+        usersService.registerUser(registerService1);
+        assertThatThrownBy(() -> usersService.registerUser(registerService2))
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -76,7 +76,7 @@ class UsersServiceTest {
     @Test
     void nameLengthIsTooLongError() {
         //given
-        Register register = Register.builder()
+        RegisterService registerService = RegisterService.builder()
                 .name("mynameisKang")
                 .job(Jobs.STUDENT)
                 .phone("010-0000-0000")
@@ -84,7 +84,7 @@ class UsersServiceTest {
                 .build();
 
         //when //then
-        assertThatThrownBy(() -> usersService.registerUser(register))
+        assertThatThrownBy(() -> usersService.registerUser(registerService))
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -92,7 +92,7 @@ class UsersServiceTest {
     @Test
     void phoneLengthIsTooLongError() {
         //given
-        Register register = Register.builder()
+        RegisterService registerService = RegisterService.builder()
                 .name("mynameisKang")
                 .job(Jobs.STUDENT)
                 .phone("010-0000-0000")
@@ -100,7 +100,7 @@ class UsersServiceTest {
                 .build();
 
         //when //then
-        assertThatThrownBy(() -> usersService.registerUser(register))
+        assertThatThrownBy(() -> usersService.registerUser(registerService))
                 .isInstanceOf(DataIntegrityViolationException.class);
     }
 
@@ -108,13 +108,13 @@ class UsersServiceTest {
     @Test
     void getUserInfo() {
         //given
-        Register register = Register.builder()
+        RegisterService registerService = RegisterService.builder()
                 .name("name")
                 .job(Jobs.STUDENT)
                 .phone("010-0000-0000")
                 .man(true)
                 .build();
-        Long id = usersService.registerUser(register);
+        Long id = usersService.registerUser(registerService);
 
         //when
         UserResponse userInfo = usersService.getUserInfo(id);
@@ -130,13 +130,13 @@ class UsersServiceTest {
     @Test
     void deleteUser() {
         //given
-        Register register = Register.builder()
+        RegisterService registerService = RegisterService.builder()
                 .name("name")
                 .job(Jobs.STUDENT)
                 .phone("010-0000-0000")
                 .man(true)
                 .build();
-        Long id = usersService.registerUser(register);
+        Long id = usersService.registerUser(registerService);
 
         //when
         usersService.deleteUser(id);

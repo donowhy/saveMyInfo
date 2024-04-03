@@ -5,7 +5,7 @@ import com.gathering.info.info.domain.users.entity.enumType.Jobs;
 import lombok.Builder;
 
 @Builder(toBuilder = true)
-public record UserResponse (
+public record UserResponse(
       String name,
       Jobs job,
       String phone,

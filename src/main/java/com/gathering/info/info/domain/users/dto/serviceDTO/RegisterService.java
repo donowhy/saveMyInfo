@@ -5,7 +5,7 @@ import com.gathering.info.info.domain.users.entity.Users;
 import lombok.Builder;
 
 @Builder(toBuilder = true)
-public record Register(
+public record RegisterService(
         String name,
 
         Jobs job,
@@ -15,12 +15,12 @@ public record Register(
         boolean man
 ) {
 
-    public static Users of (Register register) {
+    public static Users of (RegisterService registerService) {
         return Users.builder()
-                .name(register.name())
-                .job(register.job())
-                .phone(register.phone())
-                .man(register.man())
+                .name(registerService.name())
+                .job(registerService.job())
+                .phone(registerService.phone())
+                .man(registerService.man())
                 .build();
     }
 }
