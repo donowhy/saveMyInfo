@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class Tasks {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,8 @@ public class Tasks {
     @Column(length = 20)
     private String job;
 
-    public static Tasks create(String job) {
-        return Tasks.builder()
+    public static Task create(String job) {
+        return Task.builder()
                 .job(job)
                 .build();
     }

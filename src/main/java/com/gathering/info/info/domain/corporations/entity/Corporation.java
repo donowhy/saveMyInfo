@@ -1,10 +1,12 @@
 package com.gathering.info.info.domain.corporations.entity;
 
 import com.gathering.info.info.domain.corporations.dto.RegisterCorporation;
+import com.gathering.info.info.domain.resumes.Resume;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,7 +14,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class Corporations {
+public class Corporation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,16 +26,10 @@ public class Corporations {
 
     private LocalDateTime endDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Tasks> tasksList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> taskList = new ArrayList<>();
 
-    public static Corporations toRegister(List<Tasks> tasks, RegisterCorporation registerCorporation) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "corporation", orphanRemoval = true)
+    private List<Resume> resumeList = new ArrayList<>();
 
-        return Corporations.builder()
-                .name(registerCorporation.name())
-                .startDate(registerCorporation.startDate())
-                .endDate(registerCorporation.endDate())
-                .tasksList(tasks)
-                .build();
-    }
 }

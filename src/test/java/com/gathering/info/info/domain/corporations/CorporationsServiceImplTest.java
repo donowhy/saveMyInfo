@@ -1,13 +1,11 @@
 package com.gathering.info.info.domain.corporations;
 
 import com.gathering.info.info.domain.corporations.dto.RegisterCorporation;
-import com.gathering.info.info.domain.corporations.entity.Corporations;
-import com.gathering.info.info.domain.corporations.entity.Tasks;
+import com.gathering.info.info.domain.corporations.entity.Corporation;
+import com.gathering.info.info.domain.corporations.entity.Task;
 import com.gathering.info.info.domain.corporations.repository.CorporationsRepository;
 import com.gathering.info.info.domain.corporations.repository.TasksRepository;
 import com.gathering.info.info.domain.corporations.service.impl.CorporationsServiceImpl;
-import com.gathering.info.info.domain.corporations.service.impl.TasksServiceImpl;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,9 +29,6 @@ class CorporationsServiceImplTest {
 
     @Autowired
     private CorporationsServiceImpl corporationsService;
-
-    @Autowired
-    private TasksServiceImpl tasksService;
 
     @Autowired
     private TasksRepository tasksRepository;
@@ -62,7 +57,7 @@ class CorporationsServiceImplTest {
         corporationsService.registerCorp(registerCorporation);
 
         // then
-        List<Corporations> corporationsList = corporationsRepository.findAll();
+        List<Corporation> corporationsList = corporationsRepository.findAll();
         assertThat(corporationsList)
                 .extracting("name", "startDate", "endDate")
                 .containsExactlyInAnyOrder(
@@ -70,8 +65,8 @@ class CorporationsServiceImplTest {
                                 LocalDateTime.of(2024, 4, 30, 12, 30),
                                 LocalDateTime.of(2024, 5, 30, 12, 30)));
 
-        List<String> storedJobs = corporationsList.get(0).getTasksList().stream()
-                .map(Tasks::getJob)
+        List<String> storedJobs = corporationsList.get(0).getTaskList().stream()
+                .map(Task::getJob)
                 .collect(Collectors.toList());
         assertThat(storedJobs).containsExactlyInAnyOrderElementsOf(jobList);
     }
