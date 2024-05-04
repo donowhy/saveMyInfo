@@ -1,9 +1,9 @@
 package com.gathering.info.info.domain.users.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gathering.info.info.domain.users.dto.controllerDTO.Register;
+import com.gathering.info.info.domain.users.service.dto.controllerDTO.Register;
 import com.gathering.info.info.domain.users.entity.enumType.Jobs;
-import com.gathering.info.info.domain.users.service.UsersService;
+import com.gathering.info.info.domain.users.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ class UsersControllerTest {
     private ObjectMapper objectMapper;
 
     @MockBean
-    private UsersService usersService;
+    private UserServiceImpl userServiceImpl;
 
     @DisplayName("이름과 전화번호, 성별을 입력하면 회원가입 로직이 호출이 된다.")
     @Test

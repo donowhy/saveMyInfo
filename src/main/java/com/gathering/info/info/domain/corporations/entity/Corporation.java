@@ -1,7 +1,6 @@
 package com.gathering.info.info.domain.corporations.entity;
 
-import com.gathering.info.info.domain.corporations.dto.RegisterCorporation;
-import com.gathering.info.info.domain.resumes.Resume;
+import com.gathering.info.info.domain.resumes.entity.Resume;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,9 +24,6 @@ public class Corporation {
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> taskList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "corporation", orphanRemoval = true)
     private List<Resume> resumeList = new ArrayList<>();

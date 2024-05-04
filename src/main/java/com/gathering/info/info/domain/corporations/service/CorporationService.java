@@ -1,6 +1,6 @@
 package com.gathering.info.info.domain.corporations.service;
 
-import com.gathering.info.info.domain.corporations.dto.RegisterCorporation;
+import com.gathering.info.info.domain.corporations.service.dto.RegisterCorporation;
 
 public interface CorporationService {
 

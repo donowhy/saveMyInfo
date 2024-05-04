@@ -1,12 +1,14 @@
 package com.gathering.info.info.domain.resumes;
 
-import com.gathering.info.info.domain.corporations.dto.RegisterCorporation;
+import com.gathering.info.info.domain.corporations.service.dto.RegisterCorporation;
 import com.gathering.info.info.domain.corporations.entity.Corporation;
 import com.gathering.info.info.domain.corporations.repository.CorporationsRepository;
-import com.gathering.info.info.domain.corporations.repository.TasksRepository;
 import com.gathering.info.info.domain.corporations.service.CorporationService;
 import com.gathering.info.info.domain.resumes.dto.RegisterQuestion;
 import com.gathering.info.info.domain.resumes.dto.RegisterResume;
+import com.gathering.info.info.domain.resumes.entity.Resume;
+import com.gathering.info.info.domain.resumes.repository.ResumeRepository;
+import com.gathering.info.info.domain.resumes.service.ResumeService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

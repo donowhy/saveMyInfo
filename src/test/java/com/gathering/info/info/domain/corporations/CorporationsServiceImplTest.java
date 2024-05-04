@@ -1,10 +1,8 @@
 package com.gathering.info.info.domain.corporations;
 
-import com.gathering.info.info.domain.corporations.dto.RegisterCorporation;
+import com.gathering.info.info.domain.corporations.service.dto.RegisterCorporation;
 import com.gathering.info.info.domain.corporations.entity.Corporation;
-import com.gathering.info.info.domain.corporations.entity.Task;
 import com.gathering.info.info.domain.corporations.repository.CorporationsRepository;
-import com.gathering.info.info.domain.corporations.repository.TasksRepository;
 import com.gathering.info.info.domain.corporations.service.impl.CorporationsServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
@@ -30,13 +27,10 @@ class CorporationsServiceImplTest {
     @Autowired
     private CorporationsServiceImpl corporationsService;
 
-    @Autowired
-    private TasksRepository tasksRepository;
 
     @AfterEach
     void tearDown() {
         corporationsRepository.deleteAllInBatch();
-        tasksRepository.deleteAllInBatch();
     }
 
     @DisplayName("회사 등록 시 필요한 정보가 모두 저장되는지 검증한다.")
@@ -65,9 +59,6 @@ class CorporationsServiceImplTest {
                                 LocalDateTime.of(2024, 4, 30, 12, 30),
                                 LocalDateTime.of(2024, 5, 30, 12, 30)));
 
-        List<String> storedJobs = corporationsList.get(0).getTaskList().stream()
-                .map(Task::getJob)
-                .collect(Collectors.toList());
-        assertThat(storedJobs).containsExactlyInAnyOrderElementsOf(jobList);
+
     }
 }
